@@ -1,0 +1,231 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #202020;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.scene {
+  width: 300px;
+  height: 400px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+}
+
+.card {
+  width: 180px;
+  height: 120px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: float 1s ease-in-out infinite, rotate 4s linear infinite;
+  transition: transform 1s ease-out;
+}
+
+/* Glow effect */
+.card::after {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  right: -30px;
+  bottom: -30px;
+  border-radius: 16px;
+  background: transparent;
+  z-index: -1;
+  box-shadow: 0 0 30px 15px rgba(149, 114, 218, 0.8);
+  filter: blur(20px);
+  opacity: 0.8;
+  animation: glow 3s ease-in-out infinite alternate;
+  transition: box-shadow 0.3s ease;
+}
+
+.card.glow-intense::after {
+  box-shadow: 0 0 40px 25px rgba(149, 114, 218, 0.95);
+}
+
+.card-face {
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: 6px;
+}
+
+.card-face-front, .card-face-back {
+  width: 100%;
+  height: 100%;
+  background-color: #a9a9a9;
+}
+
+.card-face-front {
+  transform: rotateY(0deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+.card-face-back {
+  transform: rotateY(180deg) translateZ(10px);
+  background-color: #9a9a9a;
+}
+
+.card-face-top {
+  width: 100%;
+  height: 10px;
+  background-color: #8d8d8d;
+  top: -10px;
+  transform: rotateX(90deg);
+  transform-origin: bottom;
+}
+
+.card-face-bottom {
+  width: 100%;
+  height: 10px;
+  background-color: #8d8d8d;
+  bottom: -10px;
+  transform: rotateX(-90deg);
+  transform-origin: top;
+}
+
+.card-face-left {
+  width: 10px;
+  height: 100%;
+  background-color: #8d8d8d;
+  left: -10px;
+  transform: rotateY(-90deg);
+  transform-origin: right;
+}
+
+.card-face-right {
+  width: 10px;
+  height: 100%;
+  background-color: #8d8d8d;
+  right: -10px;
+  transform: rotateY(90deg);
+  transform-origin: left;
+}
+
+.logo-area {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 10px;
+  margin-bottom: 8px;
+}
+
+.ps-logo {
+  width: 40px;
+  height: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ps-logo-p, .ps-logo-s {
+  position: absolute;
+  color: #333;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.ps-logo-p {
+  left: 8px;
+  top: 0;
+}
+
+.ps-logo-s {
+  right: 8px;
+  bottom: 0;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.sony-text {
+  font-size: 12px;
+  color: #333;
+  align-self: flex-end;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.card-details {
+  width: 90%;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-groove {
+  width: 90%;
+  height: 5px;
+  background-color: #7f7f7f;
+  border-radius: 5px;
+}
+
+.back-detail {
+  width: 60%;
+  height: 80%;
+  background-color: #9a9a9a;
+  margin: 15px auto;
+  border-radius: 4px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotateX(5deg);
+  }
+  50% {
+    transform: translateY(-20px) rotateX(5deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateY(0);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 20px 10px rgba(114, 137, 218, 0.7);
+  }
+  25% {
+    box-shadow: 0 0 25px 15px rgba(114, 137, 218, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 30px 15px rgba(149, 114, 218, 0.9);
+  }
+  75% {
+    box-shadow: 0 0 25px 15px rgba(218, 114, 195, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px 10px rgba(218, 114, 137, 0.7);
+  }
+}
